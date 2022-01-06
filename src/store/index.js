@@ -6,15 +6,20 @@ export default createStore({
       {
         id:1,
         title: "One",
-        
+        index:1,
+        done:true,
       },
       {
         id:2,
-        title: "Two"
+        title: "Two",
+        index:2,
+        done:false,
       },
       {
         id:3,
-        title: "Three"
+        title: "Three",
+        index:3,
+        done:false,
       },
     ]
   },
@@ -23,12 +28,13 @@ export default createStore({
   },
   mutations: {
     add_todo(state,todo){
-      state.todos.push(todo);
+      state.todos.push({...todo,index:state.todos.length+1});
     },
     delete_todo(state,id){
       state.todos = state.todos.filter(todo=>todo.id != id)
     },
     update_todo(state,todo){
+      console.log(todo)
       let index = state.todos.findIndex(td=>td.id == todo.id)
       if(index != -1){
         state.todos[index] = todo
